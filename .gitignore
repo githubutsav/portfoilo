@@ -1,0 +1,39 @@
+# Next.js build output & cache
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+.turbo/
+.swc/
+
+# Dependencies & OS
+node_modules/
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+*.pem
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env*.local
+.env.production
+.env.development
+.env.test
+
+# IDEs & Sandbox
+.vscode/
+.idea/
+.vercel/
+.snowflake/
+.v0-trash/
+__v0_*
