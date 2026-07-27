@@ -16,15 +16,21 @@ export function CatMascot() {
   // Initialize position on client mount & listen for double-click summon
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const initialX = Math.random() * (window.innerWidth - 120) + 40
-      const initialY = Math.random() * (window.innerHeight - 200) + 100
+      const isMob = window.innerWidth < 768
+      const bottomY = window.innerHeight - 56
+
+      const initialX = Math.random() * (window.innerWidth - 100) + 20
+      const initialY = isMob ? bottomY : Math.random() * (window.innerHeight - 200) + 100
+
       setPos({ x: initialX, y: initialY })
-      setTarget({ x: initialX + 150, y: initialY })
+      setTarget({ x: initialX + 100, y: initialY })
       setIsWalking(true)
 
-      // Double-click anywhere to summon Cat to cursor!
+      // Double-click / Tap to summon Cat to X coordinate!
       const handleSummon = (e: MouseEvent) => {
-        setTarget({ x: e.clientX - 20, y: e.clientY - 20 })
+        const mob = window.innerWidth < 768
+        const targetY = mob ? window.innerHeight - 56 : e.clientY - 20
+        setTarget({ x: e.clientX - 20, y: targetY })
         setIsSleeping(false)
         setIsWalking(true)
       }
@@ -49,6 +55,7 @@ export function CatMascot() {
     if (typeof window !== 'undefined') {
       window.addEventListener('mousemove', resetIdleTimer)
       window.addEventListener('scroll', resetIdleTimer)
+      window.addEventListener('touchstart', resetIdleTimer)
       resetIdleTimer()
     }
 
@@ -57,6 +64,7 @@ export function CatMascot() {
       if (typeof window !== 'undefined') {
         window.removeEventListener('mousemove', resetIdleTimer)
         window.removeEventListener('scroll', resetIdleTimer)
+        window.removeEventListener('touchstart', resetIdleTimer)
       }
     }
   }, [])
@@ -70,22 +78,31 @@ export function CatMascot() {
 
       const w = window.innerWidth
       const h = window.innerHeight
+      const isMob = w < 768
 
-      const rand = Math.random()
-      let nextX = Math.random() * (w - 120) + 40
-      let nextY = Math.random() * (h - 160) + 80
+      if (isMob) {
+        // Mobile mode: strictly horizontal movement along the bottom edge!
+        const bottomY = h - 56
+        const nextX = Math.random() * (w - 80) + 20
+        setTarget({ x: nextX, y: bottomY })
+      } else {
+        // Desktop mode: 2D roaming across entire screen
+        const rand = Math.random()
+        let nextX = Math.random() * (w - 120) + 40
+        let nextY = Math.random() * (h - 160) + 80
 
-      if (rand < 0.2) {
-        nextX = -80 // wander off left edge
-      } else if (rand < 0.4) {
-        nextX = w + 40 // wander off right edge
+        if (rand < 0.2) {
+          nextX = -80 // wander off left edge
+        } else if (rand < 0.4) {
+          nextX = w + 40 // wander off right edge
+        }
+
+        setTarget({ x: nextX, y: nextY })
       }
-
-      setTarget({ x: nextX, y: nextY })
       setIsWalking(true)
     }
 
-    const interval = setInterval(pickNewTarget, 5000)
+    const interval = setInterval(pickNewTarget, 4500)
     return () => clearInterval(interval)
   }, [isSleeping])
 
@@ -104,20 +121,24 @@ export function CatMascot() {
         if (dist < 4) {
           setIsWalking(false)
 
-          // If cat walked offscreen, teleport to opposite side and walk back in!
+          // If cat walked offscreen on desktop, teleport to opposite side!
           if (typeof window !== 'undefined') {
             const w = window.innerWidth
-            if (current.x < -60) {
-              const reInY = Math.random() * (window.innerHeight - 200) + 100
-              setTarget({ x: 100, y: reInY })
-              setIsWalking(true)
-              return { x: w + 40, y: reInY }
-            }
-            if (current.x > w + 20) {
-              const reInY = Math.random() * (window.innerHeight - 200) + 100
-              setTarget({ x: w - 140, y: reInY })
-              setIsWalking(true)
-              return { x: -60, y: reInY }
+            const isMob = w < 768
+
+            if (!isMob) {
+              if (current.x < -60) {
+                const reInY = Math.random() * (window.innerHeight - 200) + 100
+                setTarget({ x: 100, y: reInY })
+                setIsWalking(true)
+                return { x: w + 40, y: reInY }
+              }
+              if (current.x > w + 20) {
+                const reInY = Math.random() * (window.innerHeight - 200) + 100
+                setTarget({ x: w - 140, y: reInY })
+                setIsWalking(true)
+                return { x: -60, y: reInY }
+              }
             }
           }
 

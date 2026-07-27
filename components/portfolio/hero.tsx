@@ -29,7 +29,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="w-full lg:max-w-md">
+          <div className="hidden lg:block w-full lg:max-w-md">
             <AvatarMascot />
           </div>
         </div>
