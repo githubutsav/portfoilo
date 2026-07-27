@@ -367,7 +367,7 @@ export function Gallery() {
                     )
                   }
 
-                  const hasSingleColHero = selectedItem.images.some((img) => typeof img === 'object' && img.span?.includes('col-span-1'))
+                  const hasSingleColHero = selectedItem.images.some((img: any) => typeof img === 'object' && img !== null && typeof img.span === 'string' && img.span.includes('col-span-1'))
 
                   return (
                     <div
