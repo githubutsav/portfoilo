@@ -308,7 +308,7 @@ export const achievementsData: AchievementItem[] = [
     year: '2026',
     description:
       '1st Runner-Up with Team Code Oxide for building Bazaar Brain, an AI-powered product recommendation platform that analyzes buyer intent and delivers personalized recommendations.',
-    imageUrl: '/achievements/codeoxideapl.png',
+    imageUrl: '/achievements/codeapl.png',
     linkUrl: 'https://www.linkedin.com/posts/utsavsinghx_hackathon-agenticai-artificialintelligence-share-7468657785979756544-nJYN',
   },
   {
