@@ -36,16 +36,9 @@ const fontSerif = Instrument_Serif({
 // To change domain, site title, keywords, or social links: edit lib/data.ts!
 // =============================================================================
 const getSiteUrl = () => {
-  if (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim()) {
-    return process.env.NEXT_PUBLIC_SITE_URL
-  }
-  if (process.env.VERCEL_URL && process.env.VERCEL_URL.trim()) {
-    return `https://${process.env.VERCEL_URL}`
-  }
-  if (siteConfig.defaultDomain && siteConfig.defaultDomain.trim()) {
-    return `https://${siteConfig.defaultDomain}`
-  }
-  return 'http://localhost:3000'
+  const domain = siteConfig.defaultDomain || process.env.NEXT_PUBLIC_SITE_URL || 'iamutsav.dev'
+  const cleanDomain = domain.replace(/^https?:\/\//, '').trim()
+  return `https://${cleanDomain}`
 }
 
 const siteUrl = getSiteUrl()
@@ -150,7 +143,7 @@ const jsonLd = {
       mainEntityOfPage: siteUrl,
       name: siteConfig.name,
       url: siteUrl,
-      image: `${siteUrl}/og-image.png`,
+      image: `${siteUrl}/opengraph-image`,
       email: `mailto:${siteConfig.email}`,
       nationality: 'Indian',
       jobTitle: 'Full-Stack Cloud, AI & DevOps Engineer',
