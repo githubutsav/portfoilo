@@ -87,8 +87,10 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${siteUrl}/opengraph-image`,
+        secureUrl: `${siteUrl}/opengraph-image`,
         width: 1200,
         height: 630,
+        type: 'image/png',
         alt: siteConfig.title,
       },
     ],
