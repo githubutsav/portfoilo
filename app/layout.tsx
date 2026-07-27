@@ -204,9 +204,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark bg-background scroll-smooth ${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable} ${fontSerif.variable}`}
+      translate="no"
+      className={`notranslate dark bg-background scroll-smooth ${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable} ${fontSerif.variable}`}
     >
       <head>
+        <meta name="google" content="notranslate" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
