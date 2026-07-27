@@ -80,13 +80,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: '/',
+    url: siteUrl,
     siteName: `${siteConfig.name} Portfolio`,
     title: siteConfig.title,
     description: siteConfig.description,
     images: [
       {
-        url: '/opengraph-image',
+        url: `${siteUrl}/opengraph-image`,
         width: 1200,
         height: 630,
         alt: siteConfig.title,
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ['/twitter-image'],
+    images: [`${siteUrl}/twitter-image`],
     site: siteConfig.social.twitterHandle,
     creator: siteConfig.social.twitterHandle,
   },
