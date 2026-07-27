@@ -159,5 +159,42 @@ html {
 }
 
 .animate-cat-tail {
-  animation: catTailWiggle 0.4s ease-in-out infinite;
+  animation: catTailWiggle 0.6s ease-in-out infinite;
+}
+
+/* =============================================================================
+   🚫 GLOBAL SCROLLBAR REMOVAL (HIDE SCROLLBAR LINES EVERYWHERE)
+   ============================================================================= */
+* {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html,
+body,
+div,
+main,
+section,
+article,
+aside,
+nav,
+dialog {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar,
+main::-webkit-scrollbar,
+section::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }

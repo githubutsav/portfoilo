@@ -8,7 +8,7 @@ export const siteConfig = {
   description:
     'Official portfolio of Utsav Singh — Full-Stack Cloud, AI, and DevOps Engineer. Technical Coordinator at GDG on Campus BBDITM specializing in TypeScript, Next.js, GCP, AWS, Docker, AI Agents, and Gemini API.',
   defaultDomain: process.env.NEXT_PUBLIC_SITE_URL || 'iamutsav.dev', // Reads from .env or falls back to iamutsav.dev
-  googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '', // Read from .env.local or paste here
+  googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION , // Read from .env.local or paste here
   email: 'utsav0111@gmail.com',
   phone: '+91 8853640387',
   whatsappUrl: 'https://wa.me/918853640387',
