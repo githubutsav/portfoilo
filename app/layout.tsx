@@ -36,9 +36,7 @@ const fontSerif = Instrument_Serif({
 // To change domain, site title, keywords, or social links: edit lib/data.ts!
 // =============================================================================
 const getSiteUrl = () => {
-  const domain = siteConfig.defaultDomain || process.env.NEXT_PUBLIC_SITE_URL || 'iamutsav.dev'
-  const cleanDomain = domain.replace(/^https?:\/\//, '').trim()
-  return `https://${cleanDomain}`
+  return 'https://iamutsav.dev'
 }
 
 const siteUrl = getSiteUrl()
