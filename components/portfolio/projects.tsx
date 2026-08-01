@@ -206,6 +206,7 @@ export function Projects() {
                         src={asset}
                         alt={selectedProject.name}
                         placeholder="blur"
+                        priority={true}
                         sizes="(max-width: 768px) 100vw, 800px"
                         className="size-full object-contain p-2 transition-all duration-500 hover:scale-105"
                       />
@@ -217,6 +218,7 @@ export function Projects() {
                       alt={selectedProject.name}
                       width={800}
                       height={450}
+                      priority={true}
                       sizes="(max-width: 768px) 100vw, 800px"
                       className="size-full object-contain p-2 transition-all duration-500 hover:scale-105"
                     />

@@ -69,6 +69,7 @@ export function Gallery() {
             <SmartImage
               src={item.imageUrl}
               alt={item.title}
+              priority={true}
               className="size-full object-cover object-top grayscale contrast-125 brightness-90 transition-all duration-500 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105"
             />
           ) : item.videoUrl ? (

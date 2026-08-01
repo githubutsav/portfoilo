@@ -90,6 +90,7 @@ export function Achievements() {
                           src={asset}
                           alt={item.title}
                           placeholder="blur"
+                          priority={true}
                           sizes="(max-width: 768px) 100vw, 400px"
                           className={imageClassName}
                         />
@@ -101,6 +102,7 @@ export function Achievements() {
                         alt={item.title}
                         width={600}
                         height={375}
+                        priority={true}
                         sizes="(max-width: 768px) 100vw, 400px"
                         className={imageClassName}
                       />
