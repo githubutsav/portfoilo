@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { SectionHeading } from './section-heading'
 import { Award, Trophy, Star, Zap, Cloud, Users, Rocket, ArrowUpRight, MapPin, Calendar, Camera } from 'lucide-react'
 import { SiKubernetes, SiGithub } from '@icons-pack/react-simple-icons'
 import { achievementsData } from '@/lib/data'
+import { getStaticAsset } from '@/lib/assets'
 import { cn } from '@/lib/utils'
 import React from 'react'
 
@@ -76,16 +78,34 @@ export function Achievements() {
                     isWhiteBgCard ? 'bg-white' : 'bg-gradient-to-br from-card via-secondary/70 to-primary/10'
                   )}
                 >
-                  {item.imageUrl && (
-                    <img
-                      src={item.imageUrl}
-                      alt={item.title}
-                      className={cn(
-                        'absolute inset-0 size-full transition-all duration-500 group-hover:scale-105',
-                        isWhiteBgCard ? 'object-contain p-2 bg-white' : 'object-cover'
-                      )}
-                    />
-                  )}
+                  {item.imageUrl && (() => {
+                    const asset = getStaticAsset(item.imageUrl)
+                    const imageClassName = cn(
+                      'absolute inset-0 size-full transition-all duration-500 group-hover:scale-105',
+                      isWhiteBgCard ? 'object-contain p-2 bg-white' : 'object-cover'
+                    )
+                    if (typeof asset === 'object' && asset !== null) {
+                      return (
+                        <Image
+                          src={asset}
+                          alt={item.title}
+                          placeholder="blur"
+                          sizes="(max-width: 768px) 100vw, 400px"
+                          className={imageClassName}
+                        />
+                      )
+                    }
+                    return (
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title}
+                        width={600}
+                        height={375}
+                        sizes="(max-width: 768px) 100vw, 400px"
+                        className={imageClassName}
+                      />
+                    )
+                  })()}
 
                   {!isWhiteBgCard && (
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-black/30 via-25% to-transparent pointer-events-none" />

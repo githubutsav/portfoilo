@@ -290,16 +290,6 @@ export interface AchievementItem {
 
 export const achievementsData: AchievementItem[] = [
   {
-    iconName: 'Users',
-    category: 'Mentorship',
-    badge: 'Cloud Mentor',
-    title: 'Google Cloud Study Jam Sessions',
-    issuer: 'GDG on Campus BBDITM',
-    year: '2025',
-    description: 'Mentoring 200+ students on hands-on Google Cloud infrastructure labs, Docker containers, and cloud architecture.',
-    imageUrl: '',
-    linkUrl: 'https://linkedin.com/in/utsavsinghx',
-  }, {
     iconName: 'Trophy',
     category: 'Hackathon',
     badge: '1st Runner-Up',

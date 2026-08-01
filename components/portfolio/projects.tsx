@@ -2,10 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SectionHeading } from './section-heading'
 import { ArrowUpRight, X, Check, Layers, Globe } from 'lucide-react'
 import { GithubIcon } from './icons'
 import { projectsData } from '@/lib/data'
+import { getStaticAsset } from '@/lib/assets'
 import { cn } from '@/lib/utils'
 
 // 100% Dynamic Tags Container — Calculates exact visible tags based on container width
@@ -196,11 +198,30 @@ export function Projects() {
             {/* Project Image Banner */}
             {selectedProject.imageUrl && (
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-zinc-950 flex items-center justify-center">
-                <img
-                  src={selectedProject.imageUrl}
-                  alt={selectedProject.name}
-                  className="size-full object-contain p-2 transition-all duration-500 hover:scale-105"
-                />
+                {(() => {
+                  const asset = getStaticAsset(selectedProject.imageUrl)
+                  if (typeof asset === 'object' && asset !== null) {
+                    return (
+                      <Image
+                        src={asset}
+                        alt={selectedProject.name}
+                        placeholder="blur"
+                        sizes="(max-width: 768px) 100vw, 800px"
+                        className="size-full object-contain p-2 transition-all duration-500 hover:scale-105"
+                      />
+                    )
+                  }
+                  return (
+                    <Image
+                      src={selectedProject.imageUrl}
+                      alt={selectedProject.name}
+                      width={800}
+                      height={450}
+                      sizes="(max-width: 768px) 100vw, 800px"
+                      className="size-full object-contain p-2 transition-all duration-500 hover:scale-105"
+                    />
+                  )
+                })()}
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-black/40 pointer-events-none" />
                 
                 {/* Close Button at Top Right */}

@@ -1,10 +1,49 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { SectionHeading } from './section-heading'
 import { MapPin, Calendar, X, Video, Maximize2 } from 'lucide-react'
 import { galleryData } from '@/lib/data'
+import { getStaticAsset } from '@/lib/assets'
 import { cn } from '@/lib/utils'
+
+function SmartImage({
+  src,
+  alt,
+  className,
+  priority = false,
+}: {
+  src: string
+  alt: string
+  className?: string
+  priority?: boolean
+}) {
+  const asset = getStaticAsset(src)
+  if (typeof asset === 'object' && asset !== null) {
+    return (
+      <Image
+        src={asset}
+        alt={alt}
+        placeholder="blur"
+        priority={priority}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        className={className}
+      />
+    )
+  }
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={800}
+      height={600}
+      priority={priority}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      className={className}
+    />
+  )
+}
 
 export function Gallery() {
   const [selectedItem, setSelectedItem] = useState<(typeof galleryData)[0] | null>(null)
@@ -27,11 +66,10 @@ export function Gallery() {
         {/* Media Container with Monochromatic Filter */}
         <div className="relative size-full overflow-hidden bg-black">
           {item.imageUrl ? (
-            <img
+            <SmartImage
               src={item.imageUrl}
               alt={item.title}
               className="size-full object-cover object-top grayscale contrast-125 brightness-90 transition-all duration-500 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105"
-              loading="lazy"
             />
           ) : item.videoUrl ? (
             <video
@@ -231,7 +269,7 @@ export function Gallery() {
                                   )}
                                 />
                               ) : (
-                                <img
+                                <SmartImage
                                   src={media.src}
                                   alt={`${selectedItem.title} media ${idx + 1}`}
                                   className={cn(
@@ -288,7 +326,7 @@ export function Gallery() {
                                   )}
                                 />
                               ) : (
-                                <img
+                                <SmartImage
                                   src={media.src}
                                   alt={`${selectedItem.title} media ${idx + 1}`}
                                   className={cn(
@@ -406,11 +444,9 @@ export function Gallery() {
                                 )}
                               />
                             ) : (
-                              <img
+                              <SmartImage
                                 src={media.src}
                                 alt={`${selectedItem.title} media ${idx + 1}`}
-                                loading="lazy"
-                                decoding="async"
                                 className={cn(
                                   'size-full transition-transform duration-500 group-hover:scale-105',
                                   media.fit === 'contain' ? 'object-contain bg-black/90 p-1' : 'object-cover object-top',
